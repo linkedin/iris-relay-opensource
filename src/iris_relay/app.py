@@ -5,9 +5,11 @@ import os
 from gevent import monkey
 no_gevent = os.getenv('NO_GEVENT')  # NOQA
 if no_gevent is not None and no_gevent.lower() in ['true', '1', 'yes']:  # NOQA
-    print("skipping gevent monekey patching")  # NOQA
-else:  # NOQA
-    monkey.patch_all()  # NOQA 
+    del os # NOQA
+    monkey.patch_all()  # NOQA
+    import os  # NOQA
+else:
+    print("skipped gevent monkey patching")
 import hmac
 import time
 import hashlib
