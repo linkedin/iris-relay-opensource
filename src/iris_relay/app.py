@@ -2,10 +2,10 @@
 # See LICENSE in the project root for license information.
 
 import os
-from gevent import monkey
 no_gevent = os.getenv('NO_GEVENT')  # NOQA
 if no_gevent is not None and no_gevent.lower() in ['true', '1', 'yes']:  # NOQA
     del os # NOQA
+    from gevent import monkey
     monkey.patch_all()  # NOQA
     import os  # NOQA
 else:
